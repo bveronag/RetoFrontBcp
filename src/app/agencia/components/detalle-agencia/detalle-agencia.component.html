@@ -1,0 +1,20 @@
+<!-- <div class="card-block mb-3"> -->
+<div class="row" *ngFor="let agencia of agencias;let i=index ">
+    <div class="col-sm-3 btn border" [routerLink]="['/agencia', agencia.id]">
+        <img [src]="agencia.imagen" width="800px" height="600px" class="img-fluid border">
+    </div>
+    <div class="card col-sm-3 p-4 btn border" [routerLink]="['/agencia', agencia.id]">
+        <h5 class=" card-title ">Agencia {{agencia.agencia}}</h5>
+        <p class="text-center ">{{agencia.direccion}}</p>
+        <p class="text-bottom">{{agencia.distrito }} - {{agencia.provincia }} - {{agencia.departamento }} </p>
+    </div>
+    <div class="col-sm-6 p-4">
+        <!-- {{agencia | pipeFormatea }} -->
+        <!-- { lat: 35.717, lng: 139.731 } -->
+        <google-map height="100%" width="100%" [center]='{lat: 35.717, lng: 139.731 }' [zoom]="13"></google-map>
+    </div>
+
+    <hr>
+</div>
+
+<!-- </div> -->

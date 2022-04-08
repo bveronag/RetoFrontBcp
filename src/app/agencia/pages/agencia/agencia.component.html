@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row justify-content-md-center mt-5">
+        <div class="col col-lg-4">
+
+            <div *ngIf="finish && valida" class="alert alert-success" role="alert">
+                Agencia Actualizado!
+            </div>
+            <div *ngIf="!finish && valida" class="alert alert-info" role="alert">
+                Actualice Información
+            </div>
+            <div *ngIf="!valida" class="alert alert-danger" role="alert">
+                Complete todos los datos
+            </div>
+            <form (ngSubmit)="validaAgencia()" class="row g-3 needs-validation" novalidate>
+                <div class="form-group">
+                    <label for="novalidate" class="control-label">Nombre de Agencia</label>
+                    <input type="text" class="form-control" required name="agencia" [(ngModel)]="agencia.agencia">
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion" class="control-label">Dirección</label>
+                    <input type="text" class="form-control" required name="direccion" [(ngModel)]="agencia.direccion">
+                </div>
+
+                <div class="form-group">
+                    <label for="distrito" class="control-label">Distrito</label>
+                    <input type="text" class="form-control" required name="distrito" [(ngModel)]="agencia.distrito">
+                </div>
+
+                <div class="form-group">
+                    <label for="latitud" class="control-label">Latitud</label>
+                    <input type="text" class="form-control" required name="latitud" [(ngModel)]="agencia.lat" [pattern]="expresionRegular">
+                </div>
+
+                <div class="form-group">
+                    <label for="longitud" class="control-label">Longitud</label>
+                    <input type="text" class="form-control" required name="longitud" [(ngModel)]="agencia.lon">
+                </div>
+                <div class="row justify-content-between mt-2">
+                    <div class="form-group col col-lg-4 offset-lg-1">
+                        <a type="button" routerLink="['/agencias']" class="btn btn-warning ">Regresar</a>
+                    </div>
+                    <div class="form-group col col-lg-4 offset-lg-3">
+                        <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top" title="Guardando...">
+                            Actualizar
+                        </button> </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

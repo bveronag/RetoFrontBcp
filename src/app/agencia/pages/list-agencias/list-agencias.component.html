@@ -1,0 +1,20 @@
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand ">Listado de agencias</a>
+        <form class="d-flex">
+            <input class="form-control me-3" type="search" (keypress.enter)="buscaAgencias()" #Busqueda placeholder="Agencia..." aria-label="Busqueda Agencia">
+            <button class="btn btn-outline-light" (click)="buscaAgencias()">Buscar</button>
+        </form>
+    </div>
+</nav>
+<div class="mt-2">
+    <div class="container-fluid">
+        <div class="row justify-content-md-center mt-5">
+            <div class="col col-lg-10">
+                <!-- <app-detalle-agencia [agencias]="agencias"></app-detalle-agencia> -->
+            </div>
+        </div>
+
+    </div>
+
+</div>
