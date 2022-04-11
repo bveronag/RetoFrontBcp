@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+ 
 
 import { Agencia } from '../../interfaces/agencia-interface';
 
@@ -370,10 +371,10 @@ export class StorageService {
   Este método se llama sólo cuando
   no hay data en el localStorage
   */
- private saveAgencias(){
+ private saveAgencias( ){
   let contador:number =0;
 
-  //creamos un id para cada agencia
+  //creamos un id para cada agencia y asignamos una imagen
   this.agencias.map(function(agencia:Agencia){
         agencia.id=contador;
         contador++;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 
 
@@ -10,13 +10,17 @@ import { Agencia } from '../../interfaces/agencia-interface';
   templateUrl: './agencia.component.html',
   styleUrls: ['./agencia.component.css']
 })
-export class AgenciaComponent implements OnInit {
+export class AgenciaComponent implements OnInit  {
 
   agencia!:Agencia;
   finish:boolean=false;
   valida:boolean=true;
-  expresionRegular ='/^-?\d+(?:.\d+)?(?:[Ee][-+]?\d+)?$';
+  
+  options!: google.maps.MapOptions; 
 
+  markerOptions: google.maps.MarkerOptions = {draggable: false};
+  markerPositions!: google.maps.LatLngLiteral[] ;
+  
   constructor(private _activatedRoute:ActivatedRoute, private _route:Router, private _storage:StorageService) { }
 
   ngOnInit(): void {
@@ -29,15 +33,29 @@ export class AgenciaComponent implements OnInit {
       if (!this.agencia!) {
         this._route.navigateByUrl("/agencias");
       }
-  }
-  validaAgencia(){
+
+      this.options = {
+        center: {lat: parseFloat(this.agencia.lat.toString())  , lng: parseFloat(this.agencia.lon.toString())},
+        zoom: 18
+      };
+
+      this.markerPositions =[
+        {
+          lat: parseFloat(this.agencia.lat.toString()),
+          lng: parseFloat(this.agencia.lon.toString())
+        }
+      ];
+
+    }
+
+    validaAgencia(){
     if (
-        this.agencia.agencia=="" ||
-        this.agencia.direccion=="" ||
-        this.agencia.distrito=="" ||
-        this.agencia.provincia=="" ||
-        this.agencia.lat==null ||
-        this.agencia.lon==null 
+        this.agencia.agencia.trim()=="" ||
+        this.agencia.direccion.trim()=="" ||
+        this.agencia.distrito.trim()=="" ||
+        this.agencia.provincia.trim()=="" ||
+        this.agencia.lat==0 ||
+        this.agencia.lon==0 
        )
        {
         this.valida=false;
@@ -52,11 +70,12 @@ export class AgenciaComponent implements OnInit {
           this.finish=true;
           setTimeout(()=>{
             this._route.navigateByUrl("/agencias");
-          },2500)
+          },1500)
 
       };
   }
 
+ 
   
 
 }

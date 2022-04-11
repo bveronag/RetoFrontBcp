@@ -5,8 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PipeFormateaPipe implements PipeTransform {
 
-  transform(value: any): any  {
-    return JSON.stringify ({lat:value.lat,lng:value.lon} );
+  transform(value: any): google.maps.LatLngLiteral  {
+
+    return {lat:value.lat,lng:value.lon} ;
   }
 
 
