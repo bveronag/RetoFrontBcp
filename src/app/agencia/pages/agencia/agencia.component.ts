@@ -15,12 +15,12 @@ export class AgenciaComponent implements OnInit  {
   agencia!:Agencia;
   finish:boolean=false;
   valida:boolean=true;
-  
-  options!: google.maps.MapOptions; 
+  onlyNumbers:boolean=true;
 
+  options!: google.maps.MapOptions;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions!: google.maps.LatLngLiteral[] ;
-  
+
   constructor(private _activatedRoute:ActivatedRoute, private _route:Router, private _storage:StorageService) { }
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class AgenciaComponent implements OnInit  {
 
       this.options = {
         center: {lat: parseFloat(this.agencia.lat.toString())  , lng: parseFloat(this.agencia.lon.toString())},
-        zoom: 18
+        zoom: 15
       };
 
       this.markerPositions =[
@@ -66,13 +66,22 @@ export class AgenciaComponent implements OnInit  {
   }
 
   actualizaAgencia(){
-    if (this._storage.updateAgencia(this.agencia)){
-          this.finish=true;
-          setTimeout(()=>{
-            this._route.navigateByUrl("/agencias");
-          },1500)
 
-      };
+    console.log(parseFloat(this.agencia.lat.toString()));
+
+    if(!( parseFloat(this.agencia.lat.toString())) || !( parseFloat(this.agencia.lon.toString())) ){
+      debugger;
+      this.onlyNumbers = false;
+    }
+    else{
+        if (this._storage.updateAgencia(this.agencia)){
+            this.finish=true;
+            setTimeout(()=>{
+              this._route.navigateByUrl("/agencias");
+            },1500)
+            
+        };
+    }
   }
 
  

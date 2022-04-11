@@ -5,8 +5,11 @@
             <div *ngIf="finish && valida" class="alert alert-success" role="alert">
                 Agencia Actualizado!
             </div>
-            <div *ngIf="!finish && valida" class="alert alert-info" role="alert">
+            <div *ngIf="!finish && valida && onlyNumbers" class="alert alert-info" role="alert">
                 Actualice Información
+            </div>
+            <div *ngIf="!finish && !onlyNumbers" class="alert alert-danger" role="alert">
+                Ingrese sólo números en las coordenadas
             </div>
             <div *ngIf="!valida" class="alert alert-danger" role="alert">
                 Complete todos los datos
